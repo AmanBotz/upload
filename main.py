@@ -182,8 +182,8 @@ async def account_login(bot: Client, m: Message):
             elif 'master.mpd' in url:
                 url = f"{api_url}pw-dl?url={url}&token={token}&authorization={api_token}&q={raw_text2}"
 
-            name1 = links[i][0].replace("\t", "").replace(":", "").replace("/", "").replace("+", "").replace("#", "").replace("|", "").replace("@", "").replace("*", "").replace(".", "").replace("https", "").replace("http", "").strip()
-            name = f'{name1[:60]}'
+            name1 = re.sub(r'[\\/*?:"<>|()\s\']', '', links[i][0]).strip().replace(" ", "_")[:60]
+            name = f"{name1}_BY_DILJALE"
 
             if "youtu" in url:
                 ytf = f"b[height<={raw_text2}][ext=mp4]/bv[height<={raw_text2}][ext=mp4]+ba[ext=m4a]/b[ext=mp4]"
